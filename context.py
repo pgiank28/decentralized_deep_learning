@@ -20,3 +20,4 @@ class sparkGet(SparkContext):
 
 print("hi")
 g = sparkGet(2)
+g.conf();
