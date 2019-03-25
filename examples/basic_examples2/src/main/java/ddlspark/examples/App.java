@@ -1,7 +1,8 @@
 package ddlspark.examples;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.SparkSession;
-import core.NN_Estimator;
+
+import ddlspark.core.NN_Estimator;
 
 public class App 
 {
