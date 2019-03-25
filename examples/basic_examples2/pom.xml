@@ -4,31 +4,25 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-
-  <groupId>ddlspark.examples</groupId>
-  <artifactId>basic_examples2</artifactId>
+  <parent>
+    <groupId>ddlspark</groupId>
+    <artifactId>ddlspark-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+  <groupId>ddlspark</groupId>
+  <artifactId>examples.basic_examples2</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <name>basic_examples2</name>
-  <url>http://spark.apache.org</url>
+  
   <properties>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
   </properties>
 
-  <parent>
-    <groupId>ddlspark</groupId>
-    <artifactId>ddlspark</artifactId>
-    <version>1.0</version>
-    <relativePath>../../pom.xml</relativePath>
-  </parent>
+  
 
-  <repositories>
-    <repository>
-      <id>core</id>
-      <url>file:///${project.parent.basedir}/core</url>
-    </repository>
-  </repositories>
   
   <dependencies>
   <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
@@ -70,9 +64,9 @@
   </dependency>
 
   <dependency>
-    <groupId>ddlspark.core</groupId>
+    <groupId>ddlspark</groupId>
     <artifactId>core</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
   </dependency>
 
  

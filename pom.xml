@@ -6,11 +6,11 @@
 
 
   <groupId>ddlspark</groupId>
-  <artifactId>ddlspark</artifactId>
+  <artifactId>ddlspark-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <name>NN_Estimator</name>
-  <url>http://spark.apache.org</url>
+  
   <properties>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
