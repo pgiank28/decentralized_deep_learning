@@ -4,7 +4,7 @@ import org.apache.spark.sql.SparkSession;
 
 import ddlspark.core.NN_Estimator;
 
-public class App 
+public class two_node_example 
 {
     public static void main( String[] args )
     {
