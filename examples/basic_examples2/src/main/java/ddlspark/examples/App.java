@@ -13,9 +13,8 @@ public class App
       .appName("JavaSparkPi")
       .getOrCreate();
 
-    NN_Estimator ne; 
     JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
-    ne = new NN_Estimator(12);
+    NN_Estimator ne = new NN_Estimator(12);
     ne.printConf();
     System.out.println("I made it!!");
     spark.stop();
