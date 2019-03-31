@@ -1,1 +1,7 @@
-$/usr/bin/bash
+#!/bin/bash
+
+if [ -z "$SPARK_HOME" ]; then
+    echo "spark home not found"
+fi
+
+/usr/local/spark/bin/spark-submit --class ddlspark.examples.App --packages ddlspark:core:1.0-SNAPSHOT  /home/pantelisg/.m2/repository/ddlspark/examples.basic_examples2/1.0-SNAPSHOT/examples.basic_examples2-1.0-SNAPSHOT.jar 
