@@ -1,7 +1,7 @@
 package ddlspark.examples;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.SparkSession;
-
+import org.apache.spark.sql.Dataset;
 import ddlspark.core.NN_Estimator;
 
 public class App 
@@ -14,9 +14,9 @@ public class App
       .getOrCreate();
 
     JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
-    NN_Estimator ne = new NN_Estimator(12);
-    ne.printConf();
-    System.out.println("I made it!!");
+    Dataset df = spark.read().format("csv").option("header","true").load(args[0]);
+    NN_Estimator nn = new NN_Estimator(2);
+    nn.train(df);
     spark.stop();
     }
 }
