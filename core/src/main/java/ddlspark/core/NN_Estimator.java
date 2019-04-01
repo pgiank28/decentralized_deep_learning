@@ -1,9 +1,10 @@
 package ddlspark.core;
 
 public class NN_Estimator{
-    private int conf;
+    int conf;
     public NN_Estimator(int conf){
         this.conf = conf;
+	
     }
 
     public int getConf(){

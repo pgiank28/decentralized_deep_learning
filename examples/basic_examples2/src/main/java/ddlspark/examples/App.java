@@ -1,7 +1,12 @@
 package ddlspark.examples;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.SparkSession;
-
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.streaming.Durations;
+import org.apache.spark.streaming.api.java.JavaDStream;
+import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
+import org.apache.spark.streaming.api.java.JavaStreamingContext;
+import org.apache.hadoop.fs.FileSystem;
 import ddlspark.core.NN_Estimator;
 
 public class App 
@@ -12,12 +17,10 @@ public class App
       .builder()
       .appName("JavaSparkPi")
       .getOrCreate();
-
-    NN_Estimator ne; 
+ 
     JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
-    ne = new NN_Estimator(12);
-    ne.printConf();
-    System.out.println("I made it!!");
+    Dataset<float> tuples = spark.read.format("csv").option("header","true").load(args[0]);
+    System.out.println(tuples.count());
     spark.stop();
     }
 }
