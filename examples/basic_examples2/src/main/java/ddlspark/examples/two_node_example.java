@@ -9,7 +9,7 @@ import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.hadoop.fs.FileSystem;
 import ddlspark.core.NN_Estimator;
 
-public class App 
+public class two_node_example 
 {
     public static void main( String[] args )
     {
