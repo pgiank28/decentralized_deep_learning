@@ -17,9 +17,9 @@ import org.apache.hadoop.fs.FileSystem;
 
 public class NetworkExample{
 	public static void main(String[] args) throws Exception{
-	}
-}/*
-		 if (args.length < 2) {
+	
+
+		if (args.length < 2) {
       			System.err.println("Usage: NetworkExample <hostname> <port>");
       			System.exit(1);
     		}
@@ -52,4 +52,4 @@ private static class setTuple{
         	record.setWord(tuple);
         	return record;
 	}
-}*/
+}
