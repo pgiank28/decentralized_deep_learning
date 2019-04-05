@@ -3,24 +3,28 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.apache.spark</groupId>
-    <artifactId>spark-parent_2.12</artifactId>
-    <version>2.4.0</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
 
+  <parent>
+    <groupId>ddlspark</groupId>
+    <artifactId>ddlspark-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
   <groupId>ddlspark</groupId>
-  <artifactId>examples.basic_examples</artifactId>
+  <artifactId>examples.basic_examples3</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>basic_examples</name>
+  <name>basic_examples3</name>
   
   <properties>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
   </properties>
-   <dependencies>
+
+  
+
+  
+  <dependencies>
   <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
   <dependency>
     <groupId>org.apache.spark</groupId>
@@ -58,9 +62,6 @@
     <version>2.4.0</version>
     <scope>provided</scope>
   </dependency>
-
-
-
 
   <dependency>
     <groupId>ddlspark</groupId>
