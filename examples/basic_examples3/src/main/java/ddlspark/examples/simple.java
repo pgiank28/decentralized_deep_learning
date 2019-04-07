@@ -15,11 +15,12 @@ public class simple{
 	//JavaSparkContext sc = new JavaSparkContext(conf);
 	
 	SparkSession session = SparkSession.builder().getOrCreate();
-        System.out.println( "Hello World!" );
+	System.out.println( "Starting training session" );
+	
 	//JavaRDD<String> distFile = sc.textFile("file:///home/pantelisg/Desktop/data.txt");
 	Dataset<Row> df = session.read().csv("file:///home/pantelisg/Desktop/train.csv");
 	
-        df.show(13);
+    	df.show(13);
         
         
 	session.stop();
