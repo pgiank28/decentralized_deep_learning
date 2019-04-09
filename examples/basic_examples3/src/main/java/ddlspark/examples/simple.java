@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.io.*;
 import scala.Tuple2;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.broadcast.Broadcast;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.function.Function;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.Dataset;
@@ -16,6 +18,7 @@ import org.tensorflow.TensorFlow;
 import org.tensorflow.Tensor;
 import ddlspark.tensorflow.cite;
 import ddlspark.tensorflow.citePort;
+import ddlspark.tensorflow.tensorflow_graph;
 
 public class simple{
 	public static void main( String[] args )
@@ -41,9 +44,10 @@ public class simple{
       		try (Tensor t = Tensor.create(value.getBytes("UTF-8"))) {
         		// The Java API doesn't yet include convenience functions for adding operations.
         		g.opBuilder("Const", "MyConst").setAttr("dtype", t.dataType()).setAttr("value", t).build();
-        		JavaRDD<Graph> tf_trained_graph = input.javaRDD().map(s->(citePort.training_function(s,g)));
+			Broadcast<Graph> tf_nn = session.broadcast(tensorflow_graph(g));
+        		Graph tf_trained_graph = input.javaRDD().reduce(s->(citePort.training_function(s)));
 
-			tf_trained_graph.saveAsTextFile("file:///home/pantelisg/Desktop/output");
+			//tf_trained_graph.saveAsTextFile("file:///home/pantelisg/Desktop/output");
 		}catch(UnsupportedEncodingException e){
 		
 		}
@@ -52,7 +56,7 @@ public class simple{
 	session.stop();
     }
 
-
+ 
 }
 
 
