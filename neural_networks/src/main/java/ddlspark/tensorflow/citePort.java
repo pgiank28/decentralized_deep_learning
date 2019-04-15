@@ -4,13 +4,14 @@ import org.tensorflow.Graph;
 import org.tensorflow.Session;
 import org.tensorflow.Tensor;
 import org.apache.spark.sql.Row;
-import org.apache.spark.api.java.function.Function;
+import org.apache.spark.api.java.function.Function2;
 import ddlspark.tensorflow.cite;
+import ddlspark.util.tuple;
 
-public class citePort implements Function<Row,Graph>{
+public class citePort implements Function2<tuple,tuple,tuple>{
 	
 	
-	public Graph call(Row s){
+	public tuple call(tuple s,tuple t){
 		Graph g = new Graph();
 		//Map the input row to the graph for training
 		try( Session sess = new Session(g);
@@ -18,7 +19,7 @@ public class citePort implements Function<Row,Graph>{
 			System.out.println(new String(output.bytesValue()));
 		}
 			
-		return g;
+		return s;
 	}
 }
 
