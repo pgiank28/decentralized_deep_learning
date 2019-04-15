@@ -5,4 +5,4 @@ if [ -z "$SPARK_HOME" ]; then
 fi
 /usr/local/spark/sbin/start-master.sh
 /usr/local/spark/sbin/start-slave.sh spark://pantelisg-Inspiron-M5040:7077
-/usr/local/spark/bin/spark-submit --master spark://pantelisg-Inspiron-M5040:7077 --class ddlspark.examples.simple --packages ddlspark:core:1.0-SNAPSHOT,ddlspark:neural_networks:1.0-SNAPSHOT  --jars /home/pantelisg/DDLSpark/decentralized_deep_learning/util/target/util-1.0-SNAPSHOT.jar /home/pantelisg/DDLSpark/decentralized_deep_learning/examples/basic_examples3/target/examples.basic_examples3-1.0-SNAPSHOT.jar 
+/usr/local/spark/bin/spark-submit --master spark://pantelisg-Inspiron-M5040:7077 --class ddlspark.examples.simple --packages ddlspark:core:1.0-SNAPSHOT,ddlspark:neural_networks:1.0-SNAPSHOT  --jars /home/pantelisg/DDLSpark/decentralized_deep_learning/util/target/util-1.0-SNAPSHOT.jar,/home/pantelisg/DDLSpark/decentralized_deep_learning/neural_networks/target/neural_networks-1.0-SNAPSHOT.jar /home/pantelisg/DDLSpark/decentralized_deep_learning/examples/basic_examples3/target/examples.basic_examples3-1.0-SNAPSHOT.jar 

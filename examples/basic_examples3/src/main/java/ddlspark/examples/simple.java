@@ -47,9 +47,11 @@ public class simple{
       		try (Tensor t = Tensor.create(value.getBytes("UTF-8"))) {
         		// The Java API doesn't yet include convenience functions for adding operations.
         		g.opBuilder("Const", "MyConst").setAttr("dtype", t.dataType()).setAttr("value", t).build();
-			
+			citePort c = new citePort();
         		//tuple tf_trained_graph = input_dataframe.foreach(;
-			input_dataframe.foreach()
+			input_dataframe.foreach(item->{ Row f = c.call(item);
+							System.out.println("This is row "+f.toString());
+						 });
 			//tf_trained_graph.saveAsTextFile("file:///home/pantelisg/Desktop/output");
 		}catch(UnsupportedEncodingException e){
 		
