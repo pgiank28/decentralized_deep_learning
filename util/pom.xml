@@ -23,12 +23,47 @@
   </properties>
 
 
-  <dependencies>
+   <dependencies>
   <dependency>
-    <groupId>org.tensorflow</groupId>
-    <artifactId>tensorflow</artifactId>
-    <version>1.13.1</version>
+    <groupId>org.scala-lang</groupId>
+    <artifactId>scala-library</artifactId>
+    <version>2.11.7</version>
   </dependency>
   </dependencies>
 
+<build>
+  <plugins>
+  <plugin>
+    <artifactId>maven-compiler-plugin</artifactId>
+      <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+      </configuration>
+  </plugin>
+
+  <plugin>
+            <groupId>net.alchim31.maven</groupId>
+            <artifactId>scala-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>compile</goal>
+                    </goals>
+                </execution>
+            </executions>
+  </plugin>
+
+  <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+  </plugin>
+  </plugins>
+</build>
 </project>
