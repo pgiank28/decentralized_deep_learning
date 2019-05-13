@@ -63,14 +63,6 @@
     <version>2.4.0</version>
   </dependency>
 
-  <!-- https://mvnrepository.com/artifact/com.yahoo.ml/tensorflowonspark -->
-  <dependency>
-    <groupId>com.yahoo.ml</groupId>
-    <artifactId>tensorflowonspark</artifactId>
-    <version>1.0.2</version>
-  </dependency>
-
-
   <dependency>
     <groupId>ddlspark</groupId>
     <artifactId>util</artifactId>
