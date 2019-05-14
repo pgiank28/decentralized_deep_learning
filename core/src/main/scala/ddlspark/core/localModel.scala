@@ -3,10 +3,16 @@ package ddlspark.core
 import ddlspark.util.IOSpace
 import ddlspark.tensorflow.TFParams
 import ddlspark.core.coord
+import ddlspark.core.model
 
-class localModel(modelType:Int, X:Array[Int], Y:Array[Int], sigma:Int) extends IOSpace{
+
+  /*** The local learner i.
+   ***/
+class localModel(modelType:model, X:Array[Int], Y:Array[Int], sigma:Int) extends IOSpace{
 
 	
+	val currModel:model = modelType //The current state of the local neural network
+
 	/*** Managing the input samples
 	   *
 	 ***/
@@ -63,11 +69,19 @@ class localModel(modelType:Int, X:Array[Int], Y:Array[Int], sigma:Int) extends I
 	   * @param The labeled samples to classify
 	   * @return A metric,not only misclassification error, from 0 to 1 where 0 means excellent quality and 1 means bad quality
 	***/
-	def lossfunction(weights:Array[Float],samples:RDD):float = {
-		0.5
+	def lossfunction(net:network,samples:RDD,batchsize:Int):float = {
+		for(a <- 1 to batchsize){
+			prediction(net,samples.next,samples.next.label)
+		}
+		/*** Misclassification error is used for measuring the model ***/
+		measure(prediction)
 	}
 
-	
+	def prediction(net:network,sample:Array[Float],label:Int):Int = {
+		if(network.outputLayer = 0)=>1
+		if(network.outputLayer = 1)=>2
+	}
+
 
 	/*** Send alert to coordinator that a violation of loss bound occured at this local model.
 	   *

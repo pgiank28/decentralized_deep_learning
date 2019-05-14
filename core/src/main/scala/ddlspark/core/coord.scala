@@ -2,6 +2,10 @@ package ddlspark.core
 
 import ddlspark.core.localModel
 
+object synchronizationOperator{
+
+}
+
 class coord{
 	def broadcast(message:String){
 		
@@ -14,4 +18,5 @@ class coord{
 	def averaging(learners:localModel):Model = {
 
 	}
+
 }
