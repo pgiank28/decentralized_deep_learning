@@ -2,9 +2,14 @@ package ddlspark.core
 
 import ddlspark.util.IOSpace
 import ddlspark.tensorflow.TFParams
+import ddlspark.core.coord
 
 class localModel(modelType:Int, X:Array[Int], Y:Array[Int], sigma:Int) extends IOSpace{
+
 	
+	/*** Managing the input samples
+	   *
+	 ***/
 	override def input(in:Int){
 		
 	}
@@ -12,8 +17,10 @@ class localModel(modelType:Int, X:Array[Int], Y:Array[Int], sigma:Int) extends I
 	override def sample_size = 1
 	
 
-        /*** E.g., Array(780, 100, 10) means 780 inputs,
-           * one hidden layer with 100 neurons and output layer of 10 neurons.***/
+        /*** The topology of the network
+	   * E.g., Array(780, 100, 10) means 780 inputs,
+           * one hidden layer with 100 neurons and output layer of 10 neurons.
+         ***/
 	final val topology:Array[Int] = NeuralNetwork.getNeurons()
 
 	final val inputLayerParams:Array[Int] = NeuralNetwork.getParams(0)
@@ -27,7 +34,7 @@ class localModel(modelType:Int, X:Array[Int], Y:Array[Int], sigma:Int) extends I
 	def layers:Int = NeuralNetwork.getLayers()  //Neural network helper function
 
 
-	/*** The weights of the model at the beginning of the beginning of the monitoring
+	/*** The weights of the model at the beginning of the monitoring
 	   * They are the same for every learner
 	   *
     	   * @return The weights of the model
@@ -42,10 +49,12 @@ class localModel(modelType:Int, X:Array[Int], Y:Array[Int], sigma:Int) extends I
 		coord.getWeights(round)
 	}
 
-	def model(layers:Int,topology:Array[Int]):Array[Int] = {
-		/*** This function does not train a model,but gets a trained single-node neural network
-
-		   * model and abbreviates it to a local model ,so it can easily be aggregated ***/
+	/*** Current local model.It is used for making predictions and thus measuring models quality.
+	   * It consists of three parts;topology,layers and weights
+	 ***/
+	def model(layers:Int,topology:Array[Int],weights:Array[Float]):Array[Int] = {
+		val lays = layers
+	}
 
 
 	/*** The loss function measuring the quality of the local model
@@ -58,6 +67,16 @@ class localModel(modelType:Int, X:Array[Int], Y:Array[Int], sigma:Int) extends I
 		0.5
 	}
 
-
 	
+
+	/*** Send alert to coordinator that a violation of loss bound occured at this local model.
+	   *
+	 ***/
+	def violation:Int = {
+		if(lossfunction(updateWeights(0)) > 0.01){
+			0
+		}else{
+			1
+		}
+	}
 }
