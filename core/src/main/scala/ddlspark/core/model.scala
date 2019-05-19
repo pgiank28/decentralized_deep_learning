@@ -1,11 +1,16 @@
 package ddlspark.core
 
-/*** The basic represantation of the weights of a neural network.
+import ddlspark.core.activationFunction
+
+	/*** The basic represantation of the weights of a neural network.
 	   * Instances of this class are passed through coordinator and cides.
 	   * It represents the state f of a neural network model
+	   * @params 3 arrays representing the weights of the layers --> inputLayer,hiddenLayer and outputLayer
+	   * @params The number of neurons at each layer representing the topology of the network --> layers
+	   * @params The activation function of the neurons --> function
   	 ***/
 
-class model(inputLayer:Array.ofDim[Float](x,w), hiddenLayer:Array.ofDim[Float](x2,w2), outputLayer:Array.ofDim[Float](x3,w3), layers:Array[Int],sampleSize:Int){
+class model(inputLayer:Array.ofDim[Float](x,w), hiddenLayer:Array.ofDim[Float](x2,w2), outputLayer:Array.ofDim[Float](x3,w3), layers:Array[Int],sampleSize:Int,function:activationFunction){
 	
 	/*** The representation of the local instance of the neural network at time T.
    	   * It has three layers;input,hidden and output layer.
@@ -24,6 +29,10 @@ class model(inputLayer:Array.ofDim[Float](x,w), hiddenLayer:Array.ofDim[Float](x
 	val output_layer:Array.ofDim[Float](x3,w3) = outputLayer
 
 
+	/*** The activation function of the neurons.It returns a number from 0 to 1 ***/
+	val activation_function:activationFunction = function
+
+
 	/*** Checking if the sample input has the proper size
 	   * @return 0 for invalid,1 for valid
 	 ***/ 
@@ -38,7 +47,6 @@ class model(inputLayer:Array.ofDim[Float](x,w), hiddenLayer:Array.ofDim[Float](x
 			inputBad
 		}
 	}
-
-	
-	
 }
+
+
