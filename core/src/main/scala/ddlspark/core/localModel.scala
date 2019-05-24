@@ -16,13 +16,15 @@ import ddlspark.core.geometry
      * @param batchSize, the number of unique training examples per sample.B=1 for online training,B>1 for batch training
      *
    ***/
-class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, threshold:Float,batchSize:Int, distance:geometry) extends IOSpace{
+class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, threshold:Float,batchSize:Int, distance:geometry, sizeOfIndividualInput:Int) extends IOSpace{
 
 	var referenceModel:model = modelType //The global state of the network.
 	val currModel:model = modelType   //The current state of the local learner network
 	var MLLossFunction:lossFunctions = cost  //The loss function used for updating weight set
 	val T:Int = 0	//The round of training
 	var driftMetric:geometry = distance //The distance between global and local model at round T (e.g. eucleidian distance)
+	var sizeOfSamples:Int = sizeOfIndividualInput
+	var bsize:Int = batchSize
 
 
 	/*** Update the local model at a round T ***/
@@ -40,7 +42,7 @@ class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, thre
 	***/
 
 	/*** Abbreviation of the loss of the local model ***/
-	def batchLossFunction(samples:Array.ofDim[Int](numOfSamples,sizeOfSamples),labels:Array[Int]):Float = {
+	def batchLossFunction(samples:Array[Array[Int]],labels:Array[Int]):Float = {
 		MLLossFunction match{
 			case  m:MSE => m.calc(samples,labels)
 			case  c:CrossEntropy => c.calc(samples,labels)
@@ -56,13 +58,13 @@ class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, thre
 	/*** Calculate the output of one layer neurons as an array.
 	   * For input layer,sample is the tuple for prediction.
 	   * In case of the hidden and the output layer,sample is the output of the previous layer***/
-	def LayerPrediction(sample:Array[Float],layer:Int):Array[Int] = {
+	def LayerPrediction(sample:Array[Float],layer:Int):Array[Float] = {
 		
 		val j:Int = 0
 		if(layer==0){
 			val inputToHiddenResults:Array[Float] = new Array[Float](cur_model.inputLayer.w)
 			for(row <- cur_model.inputLayer){
-				inputToHiddenResults[j] = cur_model.activation_function.calc(sample,row,0)
+				inputToHiddenResults(j) = cur_model.activation_function.calc(sample,row,0)
 				j=j+1
 			}
 			inputToHiddenResults
@@ -72,7 +74,7 @@ class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, thre
 		if(layer==1){
 			val hiddenToOutputResults:Array[Float] = new Array[Float](cur_model.hiddenLayer.w2)
 			for(row <- cur_model.hiddenLayer){
-				hiddenToOutputResults[j] = cur_model.activation_function.calc(sample,row,0)
+				hiddenToOutputResults(j) = cur_model.activation_function.calc(sample,row,0)
 				j=j+1
 			}
 			hiddenToOutputResults
@@ -82,7 +84,7 @@ class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, thre
 		if(layer==2){
 			val outputResults:Array[Float] = new Array[Float](cur_model.outputLayer.w3)
 			for(row <- cur_model.outputLayer){
-				outputResults[j] = cur_model.activation_function.calc(sample,row,0)
+				outputResults(j) = cur_model.activation_function.calc(sample,row,0)
 				j=j+1
 			}
 			outputResults
@@ -93,17 +95,9 @@ class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, thre
 	/*** Calculate possible violation of the threshold 
 	   *
          ***/
-	def violation():Boolean{
-		// Check if we are at round T mod b = 0 (where b is the batch size)
-		if(this.T % this.batchSize == 0){
-			// Check if |fi-r|^2 < threshold,where fi is the current model and r the reference global model
-			this.driftMetric match{
-				case e:eucleidian => e.distance(this.referenceModel,this.currModel) > this.threshold)
-				case m:manhattan => m.distance(this.referenceModel,this.currModel) > this.threshold)
-			}
-		}else{
-			false
-		}
+	def violation():Boolean = this.driftMetric match{
+		case e:eucleidian => (this.T % this.batchSize == 0) && (e.distance(this.referenceModel,this.currModel) > this.threshold)
+		case m:manhattan => (this.T % this.batchSize == 0) && (m.distance(this.referenceModel,this.currModel) > this.threshold)
 	}
 
 

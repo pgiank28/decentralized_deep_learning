@@ -1,6 +1,6 @@
 package ddlspark.core
 
-import ddlspark.core.activationFunction
+import ddlspark.core.activationFunctions
 
 	/*** The basic represantation of the weights of a neural network.
 	   * Instances of this class are passed through coordinator and cides.
@@ -10,7 +10,7 @@ import ddlspark.core.activationFunction
 	   * @params The activation function of the neurons --> function
   	 ***/
 
-class model(inputLayer:Array.ofDim[Float](x,w), hiddenLayer:Array.ofDim[Float](x2,w2), outputLayer:Array.ofDim[Float](x3,w3), layers:Array[Int],sampleSize:Int,function:activationFunction){
+class model(inputLayer:Array[Array[Float]], hiddenLayer:Array[Array[Float]], outputLayer:Array[Array[Float]], layers:Array[Int],sampleSize:Int,function:activationFunctions){
 	
 	/*** The representation of the local instance of the neural network at time T.
    	   * It has three layers;input,hidden and output layer.
@@ -24,13 +24,13 @@ class model(inputLayer:Array.ofDim[Float](x,w), hiddenLayer:Array.ofDim[Float](x
 	   * and are initialized from an external
    	   * source containing a trained network(e.g. Tensorflow)
  	 ***/
-	val input_layer:Array.ofDim[Float](x,w) = inputLayer
-	val hidden_layer:Array.ofDim[Float](x2,w2) = hiddenLayer
-	val output_layer:Array.ofDim[Float](x3,w3) = outputLayer
+	val input_layer:Array[Array[Float]] = inputLayer
+	val hidden_layer:Array[Array[Float]] = hiddenLayer
+	val output_layer:Array[Array[Float]] = outputLayer
 
 
 	/*** The activation function of the neurons.It returns a number from 0 to 1 ***/
-	val activation_function:activationFunction = function
+	val activation_function:activationFunctions = function
 
 
 	/*** Checking if the sample input has the proper size
