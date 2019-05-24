@@ -5,7 +5,7 @@ import scala.math.{exp,tanh}
 /*** The available activation functions for the network.
    * Available functions are sigmoid,perceptron and tanh.
  ***/
-abstract class activationFunction{
+abstract class activationFunctions{
 
 	case class perceptron extends activationFunction{
 		def calc(samp:Array[Float],weights:Array[Float],bias:Int):Int = if(sum(samp,weights)<bias) 0 else 1
