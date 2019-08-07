@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+/usr/local/spark/sbin/start-master.sh
+/usr/local/spark/sbin/start-slave.sh spark://pantelisg-Inspiron-M5040:7077
+/usr/local/spark/bin/spark-submit --master spark://pantelisg-Inspiron-M5040:7077 --class ddlspark.examples.CommunicationProtocolExample /home/pantelisg/DDLSpark/decentralized_deep_learning/examples/examples_01/target/examples.examples_01-1.0-SNAPSHOT.jar 
