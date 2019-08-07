@@ -3,9 +3,9 @@ package ddlspark.examples
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 
-import ddlspark.core.model
-import ddlspark.core.localModel
-import ddlspark.core.activationFunctions
+//import ddlspark.core.model
+//import ddlspark.core.localModel
+//import ddlspark.core.activationFunctions
 
 
 object GraphTrainingExample{
@@ -24,16 +24,16 @@ object GraphTrainingExample{
 		  * an instance of our local model framework (in core) 
 		**/
 
-		var y = "Reference Model"
+		/*var y = "Reference Model"
 		val model = new model(inLayer,hLayer,ouLayer,layers,sSize,acFunction) //General neural network topology
  		val lModel = new localModel(model,x,0,losFunction,0.01,bSize,geometry,sofInput) //Local instance of this topology
 
 		rdd.foreach{x => {y = this.agg(x,y) } }//Must be a singleton object visible(here 'GraphTrainingExample')
-		sc.stop()	
+		sc.stop()*/	
 	}
 
-	def agg(s:String,state:localModel):localModel = {
+	/*def agg(s:String,state:localModel):localModel = {
 		println("Hi")
 		"Hi"
-	}
+	}*/
 }
