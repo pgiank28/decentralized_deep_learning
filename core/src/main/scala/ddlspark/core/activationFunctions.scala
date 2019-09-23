@@ -1,6 +1,6 @@
 package ddlspark.core
 
-import ddlspark.core.model
+
 import scala.math.{exp,tanh}
 
 /*** The available activation functions for the network.
@@ -20,12 +20,10 @@ abstract class activationFunctions{
 		def calc(samp:Array[Float],weights:Array[Float],bias:Int):Int = if(tanh(sum(samp,weights))<bias) 0 else 1
 	}
 
-	def sum(samp:Array[Float],weights:Array[Float]):Int = {
-			val sum = 0
+	def sum(samp:Array[Float],weights:Array[Float]):Float = {
+			0
 			//w0*x0 + w1*x1 + w2*x2 + .... +wn*xn 
-			for(i <- 1 to samp.length){
-				sum += samp(i)*weights(i)
-			}
-			sum
+			
+			
 	}
 }

@@ -1,6 +1,6 @@
 package ddlspark.core
 
-import ddlspark.core.activationFunctions
+//import ddlspark.core.activationFunctions
 
 	/*** The basic represantation of the weights of a neural network.
 	   * Instances of this class are passed through coordinator and cides.

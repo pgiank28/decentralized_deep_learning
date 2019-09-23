@@ -1,12 +1,12 @@
 package ddlspark.core
 
 import ddlspark.util.IOSpace
-import ddlspark.tensorflow.TFParams
-import ddlspark.core.coord
-import ddlspark.core.model
-import ddlspark.core.activationFunctions
-import ddlspark.core.lossFunctions
-import ddlspark.core.geometry
+//import ddlspark.tensorflow.TFParams
+//import ddlspark.core.coord
+//import ddlspark.core.model
+//import ddlspark.core.activationFunctions
+//import ddlspark.core.lossFunctions
+//import ddlspark.core.geometry
 
   /*** The local learner i.
      *
@@ -16,12 +16,13 @@ import ddlspark.core.geometry
      * @param batchSize, the number of unique training examples per sample.B=1 for online training,B>1 for batch training
      *
    ***/
-class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, threshold:Float,batchSize:Int, distance:geometry, sizeOfIndividualInput:Int) extends IOSpace{
+   class localModel{}
+/*class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, threshold:Float,batchSize:Int, distance:geometry, sizeOfIndividualInput:Int) extends IOSpace{
 
 	var referenceModel:model = modelType //The global state of the network.
-	val currModel:model = modelType   //The current state of the local learner network
+	var currModel:model = modelType   //The current state of the local learner network
 	var MLLossFunction:lossFunctions = cost  //The loss function used for updating weight set
-	val T:Int = 0	//The round of training
+	var T:Int = 0	//The round of training
 	var driftMetric:geometry = distance //The distance between global and local model at round T (e.g. eucleidian distance)
 	var sizeOfSamples:Int = sizeOfIndividualInput
 	var bsize:Int = batchSize
@@ -29,7 +30,7 @@ class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, thre
 
 	/*** Update the local model at a round T ***/
 	private def updateModel(sample:Array[Float]) {
-		this.currModel = trainModel(sample)//Change current model by training the network (fi ---> f(i+1) )
+		//this.currModel = trainModel(sample)//Change current model by training the network (fi ---> f(i+1) )
 		this.T = this.T + 1   //Next round 
 	}
 		
@@ -42,17 +43,17 @@ class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, thre
 	***/
 
 	/*** Abbreviation of the loss of the local model ***/
-	def batchLossFunction(samples:Array[Array[Int]],labels:Array[Int]):Float = {
+	/*def batchLossFunction(samples:Array[Array[Int]],labels:Array[Int]):Float = {
 		MLLossFunction match{
 			case  m:MSE => m.calc(samples,labels)
 			case  c:CrossEntropy => c.calc(samples,labels)
 		} 
-	}
+	}*/
 
 
 
 	/*** Prediction for a unique sample given a neural network ***/
-	def pred(sample:Array[Int],func:activationFunction):Array[Float] = LayerPrediction(LayerPrediction(LayerPrediction(sample,0),1),2)
+	//def pred(sample:Array[Int],func:activationFunction):Array[Float] = LayerPrediction(LayerPrediction(LayerPrediction(sample,0),1),2)
 		
 
 	/*** Calculate the output of one layer neurons as an array.
@@ -98,8 +99,8 @@ class localModel(modelType:model, X:Array[Int], id:Int, cost:lossFunctions, thre
 	def violation():Boolean = this.driftMetric match{
 		case e:eucleidian => (this.T % this.batchSize == 0) && (e.distance(this.referenceModel,this.currModel) > this.threshold)
 		case m:manhattan => (this.T % this.batchSize == 0) && (m.distance(this.referenceModel,this.currModel) > this.threshold)
-	}
+	}*/
 
 
 
-}
+//}

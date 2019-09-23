@@ -1,7 +1,7 @@
 package ddlspark.core
 
 import math._
-import ddlspark.core.model
+
 
 /*** The possible metrics for distances the between global model and the local model ***/
 abstract class geometry{

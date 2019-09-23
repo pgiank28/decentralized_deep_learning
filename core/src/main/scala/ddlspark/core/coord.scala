@@ -1,6 +1,5 @@
 package ddlspark.core
 
-import ddlspark.core.localModel
 
 object synchronizationOperator{
 
@@ -15,8 +14,9 @@ class coord{
 	   * f=1/f
 	   *
 	 ***/
-	def averaging(learners:localModel):Model = {
-
+	def averaging(learners:localModel):Int = {
+		3
+		//new model(Array:Float(12.toFloat),Array:Float(14.toFloat),Array:Float(0.toFloat),Array:Float(0.toFloat),1,activationFunctions.sigmoid(1.5.toFloat,2.5.toFloat));
 	}
 
 }

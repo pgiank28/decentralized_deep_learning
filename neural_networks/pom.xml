@@ -84,6 +84,7 @@
   <plugin>
             <groupId>net.alchim31.maven</groupId>
             <artifactId>scala-maven-plugin</artifactId>
+            <version>4.2.0</version>
             <executions>
                 <execution>
                     <goals>
@@ -93,17 +94,7 @@
             </executions>
   </plugin>
 
-  <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                </execution>
-            </executions>
-  </plugin>
+  
   </plugins>
 </build>
 </project>
