@@ -13,6 +13,7 @@ object GraphTrainingExample{
 	def main(args:Array[String]){
 		val path = "/home/pantelisg/Desktop/train.csv"
 		val conf:SparkConf = new SparkConf().setAppName("Naive parallel training")
+		conf.set("spark.authenticate.secret", "pwd385pwd") //Authentication secret for standalone mode
 		val sc:SparkContext = new SparkContext(conf)
 		val rdd = sc.textFile(path)
 
