@@ -1,9 +1,21 @@
-# decentralized_deep_learning_in_apache_spark
-efficient decentralized deep learning by dynamic model averaging implemented in Apache Spark distributed engine with the use of pyspark.
+# DDLSpark
+## Abstract
+Deep learning training framework,for Apache Spark. With this protocol,we achieve great results regarding both the corectness and the velocity.
 
-# Network communication
-An RPC protocol is used,based on the fundamental netty protocol of Spark.
+## Installation
+Apache Spark 2.4.2 or above required.The library is simple API that allows to train a Neural Network efficiently.
+It supports Tensorflow and Spark MLlib model training.
+### Step 1
+Install the PyPi library </br>
+```pip install DDLSpark```
+### Step 2
+Import the library to your main PySpark program </br>
+```Import DDLSpark as dd```
 
-# Training of local models
+
+## Network communication
+An RPC protocol is used,based on the fundamental netty protocol of Spark.The main change compared to Netty,is that our protocol is implemented and can handle spontaneously arriving updates without communication between parent and children nodes if not necessary.
+
+## Training of local models
 Tensorflow and Spark MLlib models are supported.Each node requires TF local installation.
 
